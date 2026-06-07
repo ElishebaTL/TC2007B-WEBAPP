@@ -1,0 +1,7 @@
+{
+  "name": "grade-tracker-web",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
