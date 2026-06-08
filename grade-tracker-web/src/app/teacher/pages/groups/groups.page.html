@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Grupos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card *ngFor="let group of groups">
+
+    <ion-card-header>
+      <ion-card-title>
+        {{ group.name }}
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <p><strong>Materia:</strong> {{ group.subject }}</p>
+
+      <p><strong>Alumnos:</strong> {{ group.studentsCount }}</p>
+
+      <p>
+        <strong>Boletas pendientes:</strong>
+        {{ group.pendingReportCards }}
+      </p>
+
+    </ion-card-content>
+
+  </ion-card>
+
+</ion-content>
