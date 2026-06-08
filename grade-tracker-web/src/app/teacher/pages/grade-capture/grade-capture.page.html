@@ -1,13 +1,83 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>grade-capture</ion-title>
+    <ion-title>Captura de calificaciones</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">grade-capture</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+
+  <ion-button fill="clear" [routerLink]="['/groups', groupId]">
+    ← Volver al grupo
+  </ion-button>
+
+  <ion-card *ngIf="group">
+    <ion-card-header>
+      <ion-card-title>
+        {{ group.name }} - {{ group.subject }}
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p>Registrar y actualizar calificaciones de estudiantes</p>
+
+      <ion-select
+        label="Trimestre"
+        label-placement="stacked"
+        [(ngModel)]="selectedTrimester">
+        <ion-select-option value="Primer Trimestre">
+          Primer Trimestre
+        </ion-select-option>
+
+        <ion-select-option value="Segundo Trimestre">
+          Segundo Trimestre
+        </ion-select-option>
+
+        <ion-select-option value="Tercer Trimestre">
+          Tercer Trimestre
+        </ion-select-option>
+      </ion-select>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Estudiantes</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+     <div *ngFor="let student of students">
+  <div class="student-row">
+    <div class="student-info">
+      <strong>{{ student.name }}</strong>
+    </div>
+
+    <div class="student-grade">
+      <ion-input
+        type="number"
+        [(ngModel)]="student.average">
+      </ion-input>
+    </div>
+
+    <div class="student-status">
+      Guardado
+    </div>
+  </div>
+</div>
+
+      <ion-button expand="block" (click)="saveGrades()">
+        Guardar calificaciones
+      </ion-button>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-alert
+    header="Calificaciones guardadas"
+    message="Las calificaciones se registraron correctamente."
+    [isOpen]="showSuccessAlert"
+    (didDismiss)="showSuccessAlert = false"
+    [buttons]="['Cerrar']">
+  </ion-alert>
+
 </ion-content>

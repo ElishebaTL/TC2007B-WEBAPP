@@ -50,4 +50,17 @@ export const routes: Routes = [
     path: 'reports',
     loadComponent: () => import('./teacher/pages/reports/reports.page').then( m => m.ReportsPage)
   },
+  {
+    path: 'groups/:id',
+    loadComponent: () =>
+      import('./teacher/pages/group-detail/group-detail.page').then(
+        m => m.GroupDetailPage)
+  },
+  {
+  path: 'grade-capture/:groupId',
+  loadComponent: () =>
+    import('./teacher/pages/grade-capture/grade-capture.page').then(
+      (m) => m.GradeCapturePage
+    ),
+},
 ];

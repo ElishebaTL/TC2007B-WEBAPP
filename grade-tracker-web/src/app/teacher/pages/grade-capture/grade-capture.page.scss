@@ -1,0 +1,28 @@
+.student-row {
+  display: grid;
+  grid-template-columns: 2fr 120px 120px;
+  align-items: center;
+  gap: 20px;
+}
+
+.student-info strong {
+  display: block;
+}
+
+.student-grade ion-input {
+  --padding-start: 12px;
+  --padding-end: 12px;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+}
+
+.student-status {
+  color: #1bb55c;
+  font-weight: 600;
+}
+
+@media (max-width: 700px) {
+  .student-row {
+    grid-template-columns: 1fr;
+  }
+}

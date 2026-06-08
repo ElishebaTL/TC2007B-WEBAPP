@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { IonButton } from '@ionic/angular/standalone';
 
 import {
   IonContent,
@@ -22,6 +24,7 @@ import { GroupService } from '../../services/group';
   standalone: true,
   imports: [
     CommonModule,
+    RouterLink,
     IonContent,
     IonHeader,
     IonTitle,
@@ -29,7 +32,8 @@ import { GroupService } from '../../services/group';
     IonCard,
     IonCardHeader,
     IonCardTitle,
-    IonCardContent
+    IonCardContent,
+    IonButton,
   ]
 })
 export class GroupsPage implements OnInit {

@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detalle del grupo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-button fill="clear" routerLink="/groups">
+    ← Volver a grupos
+  </ion-button>
+
+  <ion-card *ngIf="group">
+    <ion-card-header>
+      <ion-card-title>{{ group.name }}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p><strong>Materia:</strong> {{ group.subject }}</p>
+      <p><strong>Estudiantes:</strong> {{ group.studentsCount }}</p>
+      <p><strong>Boletas pendientes:</strong> {{ group.pendingReportCards }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button
+  expand="block"
+  [routerLink]="['/grade-capture', groupId]">
+  Capturar calificaciones del grupo
+</ion-button>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Estudiantes del grupo</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div *ngFor="let student of students">
+        <p>
+          <strong>{{ student.name }}</strong>
+        </p>
+        <p>
+          Promedio: {{ student.average }} |
+          Rendimiento: {{ student.performance }}
+        </p>
+
+        <ion-button
+          size="small"
+          [routerLink]="['/grade-capture']">
+          Capturar calificación
+        </ion-button>
+
+        <hr />
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

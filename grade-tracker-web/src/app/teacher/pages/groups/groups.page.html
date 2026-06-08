@@ -24,9 +24,12 @@
         <strong>Boletas pendientes:</strong>
         {{ group.pendingReportCards }}
       </p>
+      <ion-button
+      expand="block"
+      [routerLink]="['/groups', group.id]">
+      Ver estudiantes
+    </ion-button>
 
     </ion-card-content>
-
   </ion-card>
-
 </ion-content>
