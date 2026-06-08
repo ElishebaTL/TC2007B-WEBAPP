@@ -1,13 +1,73 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>dashboard</ion-title>
+    <ion-title>Dashboard docente</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">dashboard</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        Bienvenida, {{ teacherName }}
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p>Materia asignada: {{ subject }}</p>
+      <p>Resumen general del sistema de calificaciones.</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Resumen</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p><strong>Grupos asignados:</strong> {{ groups.length }}</p>
+      <p><strong>Estudiantes:</strong> {{ totalStudents }}</p>
+      <p><strong>Boletas pendientes:</strong> {{ totalPendingReportCards }}</p>
+      <p><strong>Comentarios pendientes:</strong> {{ pendingComments }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Mis grupos</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div *ngFor="let group of groups">
+        <p>
+          <strong>{{ group.name }}</strong> — {{ group.subject }}
+        </p>
+
+        <ion-button
+          size="small"
+          [routerLink]="['/groups', group.id]">
+          Ver grupo
+        </ion-button>
+
+        <hr />
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Próximas acciones</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p>• Revisar boletas pendientes del segundo trimestre.</p>
+      <p>• Responder comentarios de padres de familia.</p>
+      <p>• Validar calificaciones antes del cierre mensual.</p>
+
+      <ion-button expand="block" routerLink="/groups">
+        Ir a grupos
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>

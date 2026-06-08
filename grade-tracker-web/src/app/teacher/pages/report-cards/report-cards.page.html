@@ -1,13 +1,24 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>report-cards</ion-title>
+    <ion-title>Boletas</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">report-cards</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-card *ngFor="let reportCard of reportCards">
+    <ion-card-header>
+      <ion-card-title>{{ reportCard.groupName }}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p><strong>Materia:</strong> {{ reportCard.subject }}</p>
+      <p><strong>Total de estudiantes:</strong> {{ reportCard.totalStudents }}</p>
+      <p><strong>Firmadas:</strong> {{ reportCard.signed }}</p>
+      <p><strong>Pendientes:</strong> {{ reportCard.pending }}</p>
+
+      <ion-button expand="block" [routerLink]="['/report-card-detail', reportCard.id]">
+        Ver boletas del grupo
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
