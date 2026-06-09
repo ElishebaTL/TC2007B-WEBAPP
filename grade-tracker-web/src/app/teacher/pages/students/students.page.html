@@ -1,13 +1,68 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>students</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="assets/logo.jpg" alt="Logo">
+        <h3>Portal para Profesores</h3>
+      </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">students</ion-title>
-    </ion-toolbar>
-  </ion-header>
+      <nav>
+        <a routerLink="/dashboard">Dashboard</a>
+        <a routerLink="/groups">Grupos</a>
+        <a routerLink="/students" class="active">Estudiantes</a>
+        <a routerLink="/grade-capture">Captura de calificaciones</a>
+        <a routerLink="/report-cards">Boletas</a>
+        <a routerLink="/comments">Comentarios</a>
+        <a routerLink="/notifications">Notificaciones</a>
+        <a routerLink="/reports">Reportes</a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <section class="page-header">
+        <h1>Estudiantes</h1>
+        <p>Lista completa de estudiantes asignados</p>
+      </section>
+
+      <section class="filters-card">
+        <input type="text" placeholder="Buscar estudiante...">
+        <select>
+          <option>Todos los grupos</option>
+          <option>5to A</option>
+          <option>5to B</option>
+          <option>6to A</option>
+        </select>
+      </section>
+
+      <section class="table-card">
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Grupo</th>
+              <th>Promedio</th>
+              <th>Rendimiento</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let student of students">
+              <td>{{ student.name }}</td>
+              <td>{{ student.group }}</td>
+              <td class="average">{{ student.average }}</td>
+              <td>
+                <span
+                  class="badge"
+                  [class.high]="student.performance === 'Alto'"
+                  [class.medium]="student.performance === 'Medio'"
+                  [class.low]="student.performance === 'Bajo'">
+                  {{ student.performance }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
 </ion-content>

@@ -1,98 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
-import {
-  IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardContent,
-  IonButton,
-  IonInput,
-  IonSelect,
-  IonSelectOption,
-  IonAlert,
-} from '@ionic/angular/standalone';
-
-import { Group } from '../../../shared/models/group';
-import { Student } from '../../../shared/models/student';
-import { GroupService } from '../../services/group';
-import { StudentService } from '../../services/student';
+import { IonContent, IonButton } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-grade-capture',
   templateUrl: './grade-capture.page.html',
   styleUrls: ['./grade-capture.page.scss'],
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterLink,
-    FormsModule,
-    IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
-    IonCard,
-    IonCardHeader,
-    IonCardTitle,
-    IonCardContent,
-    IonButton,
-    IonInput,
-    IonSelect,
-    IonSelectOption,
-    IonAlert,
-  ],
+  imports: [CommonModule, FormsModule, RouterLink, IonContent, IonButton],
 })
-export class GradeCapturePage implements OnInit {
-  groupId!: number;
-  group?: Group;
-  students: Student[] = [];
+export class GradeCapturePage {
+  selectedGroup = '5to A - Español';
   selectedTrimester = 'Segundo Trimestre';
-  showSuccessAlert = false;
 
-  constructor(
-    private route: ActivatedRoute,
-    private groupService: GroupService,
-    private studentService: StudentService
-  ) {}
+  groups = ['5to A - Español', '5to B - Español', '6to A - Español'];
+  trimesters = ['Primer Trimestre', 'Segundo Trimestre', 'Tercer Trimestre'];
 
-  ngOnInit(): void {
-    this.groupId = Number(this.route.snapshot.paramMap.get('groupId'));
-
-    this.groupService.getGroups().subscribe((groups) => {
-      this.group = groups.find((group) => group.id === this.groupId);
-    });
-
-    this.studentService.getStudents().subscribe((students) => {
-      this.students = students.filter(
-        (student) => student.groupId === this.groupId
-      );
-    });
-  }
+  students = [
+    { name: 'Andrés Jaramillo Barón', grade: 9.1, status: 'Guardado' },
+    { name: 'Emiliano Jaramillo Barón', grade: 8.3, status: 'Guardado' },
+    { name: 'María Fernanda López', grade: 9.4, status: 'Guardado' },
+  ];
 
   saveGrades(): void {
-    console.log('DATOS MOCK - calificaciones guardadas:', {
-      groupId: this.groupId,
-      trimester: this.selectedTrimester,
-      students: this.students,
-    });
+    this.students = this.students.map((student) => ({
+      ...student,
+      status: 'Guardado',
+    }));
 
-    this.showSuccessAlert = true;
-
-    /*
-    DATOS CON BACKEND
-    Quitar comentario cuando exista conexión real.
-
-    this.gradeService.saveGrades({
-      groupId: this.groupId,
-      trimester: this.selectedTrimester,
-      students: this.students,
-    }).subscribe();
-    */
+    alert('Calificaciones guardadas correctamente.');
   }
 }

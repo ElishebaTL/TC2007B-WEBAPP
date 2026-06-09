@@ -1,24 +1,75 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Boletas</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <ion-card *ngFor="let reportCard of reportCards">
-    <ion-card-header>
-      <ion-card-title>{{ reportCard.groupName }}</ion-card-title>
-    </ion-card-header>
+  <div class="layout">
 
-    <ion-card-content>
-      <p><strong>Materia:</strong> {{ reportCard.subject }}</p>
-      <p><strong>Total de estudiantes:</strong> {{ reportCard.totalStudents }}</p>
-      <p><strong>Firmadas:</strong> {{ reportCard.signed }}</p>
-      <p><strong>Pendientes:</strong> {{ reportCard.pending }}</p>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="assets/logo.jpg" alt="Logo">
+        <h3>Portal para Profesores</h3>
+      </div>
 
-      <ion-button expand="block" [routerLink]="['/report-card-detail', reportCard.id]">
-        Ver boletas del grupo
-      </ion-button>
-    </ion-card-content>
-  </ion-card>
+      <nav>
+        <a routerLink="/dashboard">Dashboard</a>
+        <a routerLink="/groups">Grupos</a>
+        <a routerLink="/students">Estudiantes</a>
+        <a routerLink="/grade-capture">Captura de calificaciones</a>
+        <a routerLink="/report-cards" class="active">Boletas</a>
+        <a routerLink="/comments">Comentarios</a>
+        <a routerLink="/notifications">Notificaciones</a>
+        <a routerLink="/reports">Reportes</a>
+      </nav>
+    </aside>
+
+    <!-- CONTENIDO -->
+    <main class="content">
+
+      <div class="page-header">
+        <h1>Boletas</h1>
+        <p>Consulta y seguimiento de boletas por grupo</p>
+      </div>
+
+      <div class="cards-container">
+
+        <ion-card *ngFor="let reportCard of reportCards">
+
+          <ion-card-header>
+            <ion-card-title>{{ reportCard.groupName }}</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+
+            <p><strong>Materia:</strong> {{ reportCard.subject }}</p>
+
+            <p>
+              <strong>Total de estudiantes:</strong>
+              {{ reportCard.totalStudents }}
+            </p>
+
+            <p>
+              <strong>Firmadas:</strong>
+              {{ reportCard.signed }}
+            </p>
+
+            <p>
+              <strong>Pendientes:</strong>
+              {{ reportCard.pending }}
+            </p>
+
+            <ion-button
+              expand="block"
+              [routerLink]="['/report-card-detail', reportCard.id]">
+
+              Ver boletas del grupo
+
+            </ion-button>
+
+          </ion-card-content>
+
+        </ion-card>
+
+      </div>
+
+    </main>
+
+  </div>
 </ion-content>

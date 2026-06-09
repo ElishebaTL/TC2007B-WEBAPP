@@ -1,13 +1,79 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>comments</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="assets/logo.jpg" alt="Logo">
+        <h3>Portal para Profesores</h3>
+      </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">comments</ion-title>
-    </ion-toolbar>
-  </ion-header>
+      <nav>
+        <a routerLink="/dashboard">Dashboard</a>
+        <a routerLink="/groups">Grupos</a>
+        <a routerLink="/students">Estudiantes</a>
+        <a routerLink="/grade-capture">Captura de calificaciones</a>
+        <a routerLink="/report-cards">Boletas</a>
+        <a routerLink="/comments" class="active">Comentarios</a>
+        <a routerLink="/notifications">Notificaciones</a>
+        <a routerLink="/reports">Reportes</a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <section class="page-header">
+        <h1>Comentarios</h1>
+        <p>Comunicación con padres de familia</p>
+      </section>
+
+      <section class="comments-layout">
+        <div class="conversation-list">
+          <h2>Conversaciones</h2>
+
+          <div
+            class="conversation-card"
+            *ngFor="let conversation of conversations"
+            (click)="selectConversation(conversation.id)"
+            [class.active-conversation]="conversation.id === selectedConversation">
+
+            <div>
+              <strong>{{ conversation.parent }}</strong>
+              <p>{{ conversation.student }}</p>
+              <small>{{ conversation.group }}</small>
+            </div>
+
+            <span *ngIf="conversation.unread"></span>
+          </div>
+        </div>
+
+        <div class="chat-panel" *ngIf="currentConversation">
+          <div class="chat-header">
+            <h2>{{ currentConversation.student }}</h2>
+            <p>Padre/Madre: {{ currentConversation.parent }}</p>
+          </div>
+
+          <div class="messages">
+            <div
+              class="message"
+              *ngFor="let message of currentConversation.messages"
+              [class.teacher]="message.sender === 'teacher'"
+              [class.parent]="message.sender === 'parent'">
+
+              <p>{{ message.text }}</p>
+              <small>{{ message.time }}</small>
+            </div>
+          </div>
+
+          <div class="message-input">
+            <ion-input
+              placeholder="Escriba una respuesta..."
+              [(ngModel)]="newMessage">
+            </ion-input>
+
+            <ion-button (click)="sendMessage()">
+              Enviar
+            </ion-button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
 </ion-content>

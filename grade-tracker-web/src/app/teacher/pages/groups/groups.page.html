@@ -1,35 +1,61 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Grupos</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="assets/logo.jpg" alt="Logo">
+        <h3>Portal para Profesores</h3>
+      </div>
 
-  <ion-card *ngFor="let group of groups">
+      <nav>
+        <a routerLink="/dashboard">Dashboard</a>
+        <a routerLink="/groups" class="active">Grupos</a>
+        <a routerLink="/students">Estudiantes</a>
+        <a routerLink="/grade-capture">Captura de calificaciones</a>
+        <a routerLink="/report-cards">Boletas</a>
+        <a routerLink="/comments">Comentarios</a>
+        <a routerLink="/notifications">Notificaciones</a>
+        <a routerLink="/reports">Reportes</a>
+      </nav>
+    </aside>
 
-    <ion-card-header>
-      <ion-card-title>
-        {{ group.name }}
-      </ion-card-title>
-    </ion-card-header>
+    <main class="content">
+      <section class="page-header">
+        <h1>Grupos</h1>
+        <p>Consulta los grupos asignados y accede a sus estudiantes</p>
+      </section>
 
-    <ion-card-content>
+      <section class="groups-grid">
+        <article class="group-card" *ngFor="let group of groups">
+          <div class="card-top">
+            <div>
+              <h2>{{ group.name }}</h2>
+              <p>{{ group.subject }}</p>
+            </div>
 
-      <p><strong>Materia:</strong> {{ group.subject }}</p>
+            <span
+              class="badge"
+              [class.ok]="group.pendingReportCards === 0"
+              [class.warning]="group.pendingReportCards > 0">
+              {{ group.pendingReportCards }} pendientes
+            </span>
+          </div>
 
-      <p><strong>Alumnos:</strong> {{ group.studentsCount }}</p>
+          <div class="group-info">
+            <p><strong>Estudiantes:</strong> {{ group.studentsCount }}</p>
+            <p><strong>Materia:</strong> {{ group.subject }}</p>
+          </div>
 
-      <p>
-        <strong>Boletas pendientes:</strong>
-        {{ group.pendingReportCards }}
-      </p>
-      <ion-button
-      expand="block"
-      [routerLink]="['/groups', group.id]">
-      Ver estudiantes
-    </ion-button>
+          <div class="actions">
+            <ion-button [routerLink]="['/groups', group.id]">
+              Ver estudiantes
+            </ion-button>
 
-    </ion-card-content>
-  </ion-card>
+            <ion-button fill="outline" [routerLink]="['/grade-capture', group.id]">
+              Capturar calificaciones
+            </ion-button>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
 </ion-content>

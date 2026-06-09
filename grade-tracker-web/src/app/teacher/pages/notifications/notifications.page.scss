@@ -1,0 +1,122 @@
+ion-content {
+  --background: #f4f6f9;
+  color: #111827;
+}
+
+ion-toolbar {
+  --background: #135194;
+  --color: #ffffff;
+}
+
+.page-header {
+  background: linear-gradient(135deg, #135194, #196ac1);
+  color: white;
+  margin: 16px;
+  padding: 28px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-header h1 {
+  margin: 0 0 8px;
+  font-size: 32px;
+}
+
+.page-header p {
+  margin: 0;
+  font-weight: 600;
+}
+
+.bell {
+  font-size: 36px;
+  background: rgba(255, 255, 255, 0.18);
+  padding: 18px;
+  border-radius: 50%;
+}
+
+ion-button {
+  margin: 16px;
+  --border-color: #135194;
+  --color: #135194;
+  font-weight: 700;
+}
+
+ion-card {
+  margin: 16px;
+  border-radius: 16px;
+  background: #ffffff;
+  color: #111827;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+}
+
+.notification-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+}
+
+.warning {
+  background: #fff7ed;
+}
+
+.message {
+  background: #eff6ff;
+}
+
+.success {
+  background: #dcfce7;
+}
+
+.notification-info h2 {
+  margin: 0 0 6px;
+  color: #111827;
+  font-size: 20px;
+}
+
+.notification-info p {
+  margin: 0 0 8px;
+  color: #334155;
+}
+
+.notification-info small {
+  color: #64748b;
+}
+
+.status {
+  width: 10px;
+  height: 10px;
+  background: #135194;
+  border-radius: 50%;
+  margin-left: auto;
+}
+
+.read-card {
+  opacity: 0.75;
+  transition: 0.3s;
+}
+
+.read-card .notification-info h2,
+.read-card .notification-info p,
+.read-card .notification-info small {
+  color: #94a3b8;
+}
+
+ion-card {
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+ion-card:hover {
+  transform: translateY(-2px);
+}

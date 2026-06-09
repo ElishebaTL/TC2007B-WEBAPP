@@ -1,20 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { RouterLink } from '@angular/router';
+
+import { IonContent, IonButton } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-reports',
   templateUrl: './reports.page.html',
   styleUrls: ['./reports.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [CommonModule, RouterLink, IonContent, IonButton],
 })
-export class ReportsPage implements OnInit {
+export class ReportsPage {
+  groupAverages = [
+    { group: '5to A', average: 9.0 },
+    { group: '5to B', average: 8.6 },
+    { group: '6to A', average: 8.5 },
+  ];
 
-  constructor() { }
+  riskStudents = [
+    {
+      name: 'Carlos Eduardo Sánchez',
+      group: '6to A',
+      average: 6.8,
+    },
+  ];
 
-  ngOnInit() {
+  exportReport(): void {
+    alert('Reporte exportado correctamente.');
   }
-
 }

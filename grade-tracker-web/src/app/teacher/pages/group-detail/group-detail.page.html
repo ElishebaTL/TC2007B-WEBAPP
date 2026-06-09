@@ -1,57 +1,67 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Detalle del grupo</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
-  <ion-button fill="clear" routerLink="/groups">
-    ← Volver a grupos
-  </ion-button>
-
-  <ion-card *ngIf="group">
-    <ion-card-header>
-      <ion-card-title>{{ group.name }}</ion-card-title>
-    </ion-card-header>
-
-    <ion-card-content>
-      <p><strong>Materia:</strong> {{ group.subject }}</p>
-      <p><strong>Estudiantes:</strong> {{ group.studentsCount }}</p>
-      <p><strong>Boletas pendientes:</strong> {{ group.pendingReportCards }}</p>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-button
-  expand="block"
-  [routerLink]="['/grade-capture', groupId]">
-  Capturar calificaciones del grupo
-</ion-button>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Estudiantes del grupo</ion-card-title>
-    </ion-card-header>
-
-    <ion-card-content>
-      <div *ngFor="let student of students">
-        <p>
-          <strong>{{ student.name }}</strong>
-        </p>
-        <p>
-          Promedio: {{ student.average }} |
-          Rendimiento: {{ student.performance }}
-        </p>
-
-        <ion-button
-          size="small"
-          [routerLink]="['/grade-capture']">
-          Capturar calificación
-        </ion-button>
-
-        <hr />
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="assets/logo.jpg" alt="Logo">
+        <h3>Portal para Profesores</h3>
       </div>
-    </ion-card-content>
-  </ion-card>
 
+      <nav>
+        <a routerLink="/dashboard">Dashboard</a>
+        <a routerLink="/groups" class="active">Grupos</a>
+        <a routerLink="/students">Estudiantes</a>
+        <a routerLink="/grade-capture">Captura de calificaciones</a>
+        <a routerLink="/report-cards">Boletas</a>
+        <a routerLink="/comments">Comentarios</a>
+        <a routerLink="/notifications">Notificaciones</a>
+        <a routerLink="/reports">Reportes</a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <a class="back-link" routerLink="/groups">← Volver a grupos</a>
+
+      <section class="page-header">
+        <h1>{{ group.name }}</h1>
+        <p>{{ group.subject }} · {{ group.studentsCount }} estudiantes</p>
+      </section>
+
+      <section class="summary-card">
+        <div>
+          <h2>Resumen del grupo</h2>
+          <p><strong>Materia:</strong> {{ group.subject }}</p>
+          <p><strong>Estudiantes:</strong> {{ group.studentsCount }}</p>
+          <p><strong>Boletas pendientes:</strong> {{ group.pendingReportCards }}</p>
+        </div>
+
+        <div class="summary-actions">
+          <ion-button [routerLink]="['/grade-capture', group.id]">
+            Capturar calificaciones
+          </ion-button>
+
+          <ion-button fill="outline" [routerLink]="['/report-card-detail', group.id]">
+            Ver boletas
+          </ion-button>
+        </div>
+      </section>
+
+      <section class="students-card">
+        <h2>Estudiantes del grupo</h2>
+
+        <div class="student-row" *ngFor="let student of students">
+          <div>
+            <strong>{{ student.name }}</strong>
+            <p>Promedio: {{ student.average }} · Rendimiento: {{ student.performance }}</p>
+          </div>
+
+          <span
+            class="badge"
+            [class.high]="student.performance === 'Alto'"
+            [class.medium]="student.performance === 'Medio'">
+            {{ student.performance }}
+          </span>
+        </div>
+      </section>
+    </main>
+  </div>
 </ion-content>

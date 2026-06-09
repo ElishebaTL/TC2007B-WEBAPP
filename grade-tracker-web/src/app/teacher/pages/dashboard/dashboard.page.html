@@ -1,73 +1,122 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Dashboard docente</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>
-        Bienvenida, {{ teacherName }}
-      </ion-card-title>
-    </ion-card-header>
-
-    <ion-card-content>
-      <p>Materia asignada: {{ subject }}</p>
-      <p>Resumen general del sistema de calificaciones.</p>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Resumen</ion-card-title>
-    </ion-card-header>
-
-    <ion-card-content>
-      <p><strong>Grupos asignados:</strong> {{ groups.length }}</p>
-      <p><strong>Estudiantes:</strong> {{ totalStudents }}</p>
-      <p><strong>Boletas pendientes:</strong> {{ totalPendingReportCards }}</p>
-      <p><strong>Comentarios pendientes:</strong> {{ pendingComments }}</p>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Mis grupos</ion-card-title>
-    </ion-card-header>
-
-    <ion-card-content>
-      <div *ngFor="let group of groups">
-        <p>
-          <strong>{{ group.name }}</strong> — {{ group.subject }}
-        </p>
-
-        <ion-button
-          size="small"
-          [routerLink]="['/groups', group.id]">
-          Ver grupo
-        </ion-button>
-
-        <hr />
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <img src="assets/logo.jpg" alt="Logo">
+        <p>Portal para Profesores</p>
       </div>
-    </ion-card-content>
-  </ion-card>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Próximas acciones</ion-card-title>
-    </ion-card-header>
+      <nav>
+        <a class="active" routerLink="/dashboard">Dashboard</a>
+        <a routerLink="/groups">Grupos</a>
+        <a routerLink="/students">Estudiantes</a>
+        <a routerLink="/grade-capture/1">Captura de calificaciones</a>
+        <a routerLink="/report-cards">Boletas</a>
+        <a routerLink="/comments">Comentarios</a>
+        <a routerLink="/notifications">Notificaciones</a>
+        <a routerLink="/reports">Reportes</a>
+      </nav>
 
-    <ion-card-content>
-      <p>• Revisar boletas pendientes del segundo trimestre.</p>
-      <p>• Responder comentarios de padres de familia.</p>
-      <p>• Validar calificaciones antes del cierre mensual.</p>
+      <a class="logout" routerLink="/login">Cerrar sesión</a>
+    </aside>
 
-      <ion-button expand="block" routerLink="/groups">
-        Ir a grupos
-      </ion-button>
-    </ion-card-content>
-  </ion-card>
+    <main class="dashboard">
+      <section class="hero">
+        <div>
+          <p>Bienvenido</p>
+          <h1>{{ teacherName }}</h1>
+          <h2>Docente de {{ subject }}</h2>
+          <strong>Grupos asignados: 5to A, 5to B, 6to A</strong>
+        </div>
+        <div class="avatar"></div>
+      </section>
 
+      <h2>Resumen</h2>
+
+      <section class="summary-grid">
+        <div class="summary-card">
+          <span>👥</span>
+          <div>
+            <h3>{{ totalStudents }}</h3>
+            <p>Estudiantes</p>
+          </div>
+        </div>
+
+        <div class="summary-card">
+          <span>📄</span>
+          <div>
+            <h3>{{ totalPendingReportCards }}</h3>
+            <p>Boletas pendientes</p>
+            <small>Requieren atención</small>
+          </div>
+        </div>
+
+        <div class="summary-card">
+          <span>💬</span>
+          <div>
+            <h3>{{ pendingComments }}</h3>
+            <p>Comentarios pendientes</p>
+            <small>Sin responder</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-header">
+        <h2>Mis Grupos</h2>
+        <a routerLink="/groups">Ver todos ›</a>
+      </section>
+
+      <section class="groups-grid">
+        <div class="group-card" *ngFor="let group of groups">
+          <div class="group-top">
+            <h3>{{ group.name }}</h3>
+            <span>📄 {{ group.pendingReportCards }}</span>
+          </div>
+          <p>{{ group.subject }}</p>
+          <hr>
+          <div class="group-footer">
+            <small>{{ group.studentsCount }} estudiantes</small>
+            <a [routerLink]="['/groups', group.id]">Ver detalles →</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="bottom-grid">
+        <div class="panel">
+          <h2>Comentarios Sin Responder <span>2</span></h2>
+
+          <div class="comment-box">
+            <strong>Héctor Jaramillo Sánchez</strong>
+            <small>14 Mayo 2026</small>
+            <p>Me gustaría saber cómo puede ayudar a mi hijo a mejorar en lectura.</p>
+          </div>
+
+          <div class="comment-box">
+            <strong>José Martínez Cruz</strong>
+            <small>12 Mayo 2026</small>
+            <p>¿Podrían enviarnos material de apoyo para practicar en casa?</p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Próximas Fechas Importantes</h2>
+
+          <div class="date-box">
+            <strong>Entrega de calificaciones 2do Trimestre</strong>
+            <small>20 Mayo 2026</small>
+          </div>
+
+          <div class="date-box">
+            <strong>Reunión de padres 5to A</strong>
+            <small>18 Mayo 2026</small>
+          </div>
+
+          <div class="date-box">
+            <strong>Revisión de boletas pendientes</strong>
+            <small>17 Mayo 2026</small>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
 </ion-content>

@@ -1,0 +1,92 @@
+ion-content {
+  --background: #f4f6f9;
+}
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 260px;
+  background: #135194;
+  color: white;
+  padding: 24px 16px;
+}
+
+.sidebar-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.sidebar-header img {
+  width: 70px;
+  height: 70px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.sidebar-header h3 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar nav a {
+  color: white;
+  text-decoration: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a.active {
+  background: white;
+  color: #135194;
+}
+
+.content {
+  flex: 1;
+  padding: 32px;
+}
+
+.page-header {
+  background: linear-gradient(135deg, #135194, #196ac1);
+  color: white;
+  padding: 28px;
+  border-radius: 16px;
+  margin-bottom: 24px;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 32px;
+}
+
+.page-header p {
+  margin-top: 8px;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+ion-card {
+  border-radius: 16px;
+  background: white;
+  color: #111827;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+ion-button {
+  margin-top: 16px;
+  --background: #135194;
+}

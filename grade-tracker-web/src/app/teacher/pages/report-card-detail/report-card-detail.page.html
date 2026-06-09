@@ -1,13 +1,56 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>report-card-detail</ion-title>
+    <ion-title>Detalle de boletas</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">report-card-detail</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-button fill="clear" routerLink="/report-cards">
+    ← Volver a boletas
+  </ion-button>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Boletas - {{ groupName }}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p><strong>Materia:</strong> {{ subject }}</p>
+      <p><strong>Trimestre:</strong> {{ trimester }}</p>
+      <p><strong>Total de estudiantes:</strong> {{ students.length }}</p>
+      <p><strong>Firmadas:</strong> {{ signedCount }}</p>
+      <p><strong>Pendientes:</strong> {{ pendingCount }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Boletas por estudiante</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div class="student-row" *ngFor="let student of students">
+        <div>
+          <strong>{{ student.name }}</strong>
+          <p>Promedio: {{ student.average }}</p>
+        </div>
+
+        <span [class.signed]="student.signed" [class.pending]="!student.signed">
+          {{ student.signed ? 'Firmada' : 'Pendiente' }}
+        </span>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-button expand="block" (click)="downloadPdf()">
+        Descargar PDF
+      </ion-button>
+
+      <ion-button expand="block" fill="outline" (click)="sendReminder()">
+        Enviar recordatorio
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -1,83 +1,79 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Captura de calificaciones</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="assets/logo.jpg" alt="Logo">
+        <h3>Portal para Profesores</h3>
+      </div>
 
-  <ion-button fill="clear" [routerLink]="['/groups', groupId]">
-    ← Volver al grupo
-  </ion-button>
+      <nav>
+        <a routerLink="/dashboard">Dashboard</a>
+        <a routerLink="/groups">Grupos</a>
+        <a routerLink="/students">Estudiantes</a>
+        <a routerLink="/grade-capture" class="active">Captura de calificaciones</a>
+        <a routerLink="/report-cards">Boletas</a>
+        <a routerLink="/comments">Comentarios</a>
+        <a routerLink="/notifications">Notificaciones</a>
+        <a routerLink="/reports">Reportes</a>
+      </nav>
+    </aside>
 
-  <ion-card *ngIf="group">
-    <ion-card-header>
-      <ion-card-title>
-        {{ group.name }} - {{ group.subject }}
-      </ion-card-title>
-    </ion-card-header>
+    <main class="content">
+      <section class="page-title">
+        <h1>Captura de Calificaciones</h1>
+        <p>Registrar y actualizar calificaciones de estudiantes</p>
+      </section>
 
-    <ion-card-content>
-      <p>Registrar y actualizar calificaciones de estudiantes</p>
+      <section class="filters-card">
+        <div>
+          <label>Grupo</label>
+          <select [(ngModel)]="selectedGroup">
+            <option *ngFor="let group of groups">{{ group }}</option>
+          </select>
+        </div>
 
-      <ion-select
-        label="Trimestre"
-        label-placement="stacked"
-        [(ngModel)]="selectedTrimester">
-        <ion-select-option value="Primer Trimestre">
-          Primer Trimestre
-        </ion-select-option>
+        <div>
+          <label>Trimestre</label>
+          <select [(ngModel)]="selectedTrimester">
+            <option *ngFor="let trimester of trimesters">{{ trimester }}</option>
+          </select>
+        </div>
+      </section>
 
-        <ion-select-option value="Segundo Trimestre">
-          Segundo Trimestre
-        </ion-select-option>
+      <section class="table-card">
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre del estudiante</th>
+              <th>Calificación</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
 
-        <ion-select-option value="Tercer Trimestre">
-          Tercer Trimestre
-        </ion-select-option>
-      </ion-select>
-    </ion-card-content>
-  </ion-card>
+          <tbody>
+            <tr *ngFor="let student of students">
+              <td>{{ student.name }}</td>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Estudiantes</ion-card-title>
-    </ion-card-header>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="10"
+                  step="0.1"
+                  [(ngModel)]="student.grade">
+              </td>
 
-    <ion-card-content>
+              <td class="saved">{{ student.status }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
 
-     <div *ngFor="let student of students">
-  <div class="student-row">
-    <div class="student-info">
-      <strong>{{ student.name }}</strong>
-    </div>
-
-    <div class="student-grade">
-      <ion-input
-        type="number"
-        [(ngModel)]="student.average">
-      </ion-input>
-    </div>
-
-    <div class="student-status">
-      Guardado
-    </div>
+      <div class="button-row">
+        <ion-button (click)="saveGrades()">
+          Guardar calificaciones
+        </ion-button>
+      </div>
+    </main>
   </div>
-</div>
-
-      <ion-button expand="block" (click)="saveGrades()">
-        Guardar calificaciones
-      </ion-button>
-
-    </ion-card-content>
-  </ion-card>
-
-  <ion-alert
-    header="Calificaciones guardadas"
-    message="Las calificaciones se registraron correctamente."
-    [isOpen]="showSuccessAlert"
-    (didDismiss)="showSuccessAlert = false"
-    [buttons]="['Cerrar']">
-  </ion-alert>
-
 </ion-content>

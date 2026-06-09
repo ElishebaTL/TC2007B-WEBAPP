@@ -1,0 +1,178 @@
+ion-content {
+  --background: #f4f6f9;
+}
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 260px;
+  background: #135194;
+  color: white;
+  padding: 24px 16px;
+}
+
+.sidebar-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.sidebar-header img {
+  width: 70px;
+  height: 70px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.sidebar-header h3 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar nav a {
+  color: white;
+  text-decoration: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a.active {
+  background: white;
+  color: #135194;
+}
+
+.content {
+  flex: 1;
+  padding: 32px;
+}
+
+.page-header {
+  background: linear-gradient(135deg, #135194, #196ac1);
+  color: white;
+  padding: 28px;
+  border-radius: 16px;
+  margin-bottom: 24px;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 32px;
+}
+
+.comments-layout {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 24px;
+}
+
+.conversation-list,
+.chat-panel {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  color: #111827;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.conversation-card {
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+}
+
+.conversation-card p {
+  margin: 6px 0;
+  color: #475569;
+}
+
+.conversation-card small {
+  color: #64748b;
+}
+
+.active-conversation {
+  border-color: #135194;
+  background: #eff6ff;
+}
+
+.conversation-card span {
+  width: 10px;
+  height: 10px;
+  background: #135194;
+  border-radius: 50%;
+}
+
+.chat-header {
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 16px;
+}
+
+.chat-header h2 {
+  margin: 0;
+}
+
+.chat-header p {
+  color: #475569;
+}
+
+.messages {
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.message {
+  max-width: 70%;
+  padding: 14px;
+  border-radius: 16px;
+}
+
+.message p {
+  margin: 0 0 8px;
+}
+
+.message small {
+  color: #64748b;
+}
+
+.parent {
+  align-self: flex-start;
+  background: #f1f5f9;
+}
+
+.teacher {
+  align-self: flex-end;
+  background: #dbeafe;
+}
+
+.message-input {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+ion-input {
+  --background: #f8fafc;
+  --color: #111827;
+  --padding-start: 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+}
+
+ion-button {
+  --background: #135194;
+}

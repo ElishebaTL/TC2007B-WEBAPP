@@ -1,13 +1,70 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>reports</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="assets/logo.jpg" alt="Logo">
+        <h3>Portal para Profesores</h3>
+      </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">reports</ion-title>
-    </ion-toolbar>
-  </ion-header>
+      <nav>
+        <a routerLink="/dashboard">Dashboard</a>
+        <a routerLink="/groups">Grupos</a>
+        <a routerLink="/students">Estudiantes</a>
+        <a routerLink="/grade-capture">Captura de calificaciones</a>
+        <a routerLink="/report-cards">Boletas</a>
+        <a routerLink="/comments">Comentarios</a>
+        <a routerLink="/notifications">Notificaciones</a>
+        <a routerLink="/reports" class="active">Reportes</a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <section class="page-header">
+        <h1>Reportes</h1>
+        <p>Análisis y estadísticas académicas</p>
+      </section>
+
+      <section class="charts-grid">
+        <div class="card">
+          <h2>Rendimiento por Grupo</h2>
+
+          <div class="fake-chart">
+            <div class="bar" style="height: 90%;">5to A</div>
+            <div class="bar" style="height: 86%;">5to B</div>
+            <div class="bar" style="height: 85%;">6to A</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Tendencia por Trimestre</h2>
+
+          <div class="line-placeholder">
+            Promedio General: 8.9 → 8.8
+          </div>
+        </div>
+      </section>
+
+      <section class="table-card">
+        <h2>Estudiantes en Riesgo</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Grupo</th>
+              <th>Promedio</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let student of riskStudents">
+              <td>{{ student.name }}</td>
+              <td>{{ student.group }}</td>
+              <td class="danger">{{ student.average }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
 </ion-content>
