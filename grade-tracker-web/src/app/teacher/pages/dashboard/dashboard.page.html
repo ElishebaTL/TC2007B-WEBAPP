@@ -1,26 +1,27 @@
 <ion-content>
   <div class="layout">
     <aside class="sidebar">
-      <div class="sidebar-brand">
+      <div class="sidebar-header">
         <img src="assets/logo.jpg" alt="Logo">
-        <p>Portal para Profesores</p>
+        <h3>Portal para Profesores</h3>
       </div>
 
       <nav>
-        <a class="active" routerLink="/dashboard">Dashboard</a>
+        <a routerLink="/dashboard" class="active">Dashboard</a>
         <a routerLink="/groups">Grupos</a>
-        <a routerLink="/students">Estudiantes</a>
-        <a routerLink="/grade-capture/1">Captura de calificaciones</a>
+        <a routerLink="/grade-capture">Captura de calificaciones</a>
         <a routerLink="/report-cards">Boletas</a>
         <a routerLink="/comments">Comentarios</a>
         <a routerLink="/notifications">Notificaciones</a>
         <a routerLink="/reports">Reportes</a>
       </nav>
 
-      <a class="logout" routerLink="/login">Cerrar sesión</a>
+      <div class="logout">
+        <a routerLink="/login">Cerrar sesión</a>
+      </div>
     </aside>
 
-    <main class="dashboard">
+    <main class="content">
       <section class="hero">
         <div>
           <p>Bienvenido</p>
@@ -28,6 +29,7 @@
           <h2>Docente de {{ subject }}</h2>
           <strong>Grupos asignados: 5to A, 5to B, 6to A</strong>
         </div>
+
         <div class="avatar"></div>
       </section>
 
@@ -72,8 +74,10 @@
             <h3>{{ group.name }}</h3>
             <span>📄 {{ group.pendingReportCards }}</span>
           </div>
+
           <p>{{ group.subject }}</p>
           <hr>
+
           <div class="group-footer">
             <small>{{ group.studentsCount }} estudiantes</small>
             <a [routerLink]="['/groups', group.id]">Ver detalles →</a>

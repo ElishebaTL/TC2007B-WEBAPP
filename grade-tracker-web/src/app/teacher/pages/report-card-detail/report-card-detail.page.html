@@ -1,56 +1,79 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Detalle de boletas</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <ion-button fill="clear" routerLink="/report-cards">
-    ← Volver a boletas
-  </ion-button>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Boletas - {{ groupName }}</ion-card-title>
-    </ion-card-header>
-
-    <ion-card-content>
-      <p><strong>Materia:</strong> {{ subject }}</p>
-      <p><strong>Trimestre:</strong> {{ trimester }}</p>
-      <p><strong>Total de estudiantes:</strong> {{ students.length }}</p>
-      <p><strong>Firmadas:</strong> {{ signedCount }}</p>
-      <p><strong>Pendientes:</strong> {{ pendingCount }}</p>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Boletas por estudiante</ion-card-title>
-    </ion-card-header>
-
-    <ion-card-content>
-      <div class="student-row" *ngFor="let student of students">
-        <div>
-          <strong>{{ student.name }}</strong>
-          <p>Promedio: {{ student.average }}</p>
-        </div>
-
-        <span [class.signed]="student.signed" [class.pending]="!student.signed">
-          {{ student.signed ? 'Firmada' : 'Pendiente' }}
-        </span>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="assets/logo.jpg" alt="Logo">
+        <h3>Portal para Profesores</h3>
       </div>
-    </ion-card-content>
-  </ion-card>
 
-  <ion-card>
-    <ion-card-content>
-      <ion-button expand="block" (click)="downloadPdf()">
-        Descargar PDF
-      </ion-button>
+      <nav>
+        <a routerLink="/dashboard">Dashboard</a>
+        <a routerLink="/groups">Grupos</a>
+        <a routerLink="/grade-capture">Captura de calificaciones</a>
+        <a routerLink="/report-cards" class="active">Boletas</a>
+        <a routerLink="/comments">Comentarios</a>
+        <a routerLink="/notifications">Notificaciones</a>
+        <a routerLink="/reports">Reportes</a>
+      </nav>
 
-      <ion-button expand="block" fill="outline" (click)="sendReminder()">
-        Enviar recordatorio
-      </ion-button>
-    </ion-card-content>
-  </ion-card>
+
+      <div class="logout">
+        <a routerLink="/login">Cerrar sesión</a>
+      </div>
+    </aside>
+
+    <main class="content">
+      <a class="back-link" routerLink="/report-cards">← Volver a boletas</a>
+
+      <section class="page-header">
+        <h1>Detalle de boletas</h1>
+        <p>Consulta de firmas y seguimiento por estudiante</p>
+      </section>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Boletas - {{ groupName }}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <p><strong>Materia:</strong> {{ subject }}</p>
+          <p><strong>Trimestre:</strong> {{ trimester }}</p>
+          <p><strong>Total de estudiantes:</strong> {{ students.length }}</p>
+          <p><strong>Firmadas:</strong> {{ signedCount }}</p>
+          <p><strong>Pendientes:</strong> {{ pendingCount }}</p>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Boletas por estudiante</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <div class="student-row" *ngFor="let student of students">
+            <div>
+              <strong>{{ student.name }}</strong>
+              <p>Promedio: {{ student.average }}</p>
+            </div>
+
+            <span [class.signed]="student.signed" [class.pending]="!student.signed">
+              {{ student.signed ? 'Firmada' : 'Pendiente' }}
+            </span>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-content>
+          <ion-button expand="block" (click)="downloadPdf()">
+            Descargar PDF
+          </ion-button>
+
+          <ion-button expand="block" fill="outline" (click)="sendReminder()">
+            Enviar recordatorio
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </main>
+  </div>
 </ion-content>

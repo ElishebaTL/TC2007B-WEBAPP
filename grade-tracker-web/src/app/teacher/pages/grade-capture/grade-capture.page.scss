@@ -145,6 +145,38 @@ td input {
 
 ion-button {
   --background: #135194;
+  --background-hover: #0f4279;
+  --color: white;
   --border-radius: 10px;
   font-weight: 700;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.sidebar nav {
+  flex: 1;
+}
+
+.logout {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.logout a {
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  display: block;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.logout a:hover {
+  background: white;
+  color: #135194;
 }

@@ -12,6 +12,9 @@ ion-content {
   background: #135194;
   color: white;
   padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .sidebar-header {
@@ -24,6 +27,8 @@ ion-content {
   height: 70px;
   border-radius: 8px;
   margin-bottom: 12px;
+  object-fit: contain;
+  background: white;
 }
 
 .sidebar-header h3 {
@@ -35,6 +40,7 @@ ion-content {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  flex: 1;
 }
 
 .sidebar nav a {
@@ -42,11 +48,31 @@ ion-content {
   text-decoration: none;
   padding: 12px;
   border-radius: 10px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .sidebar nav a:hover,
 .sidebar nav a.active {
+  background: white;
+  color: #135194;
+}
+
+.logout {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.logout a {
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  display: block;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.logout a:hover {
   background: white;
   color: #135194;
 }
@@ -71,6 +97,8 @@ ion-content {
 
 .page-header p {
   margin-top: 8px;
+  font-weight: 600;
+  color: white;
 }
 
 .cards-container {
@@ -83,10 +111,32 @@ ion-card {
   border-radius: 16px;
   background: white;
   color: #111827;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+ion-card-title {
+  color: #111827;
+  font-weight: 700;
+  font-size: 26px;
+}
+
+ion-card-content {
+  color: #334155;
+}
+
+ion-card-content p {
+  color: #334155;
+  margin: 8px 0;
+}
+
+ion-card-content strong {
+  color: #111827;
 }
 
 ion-button {
-  margin-top: 16px;
   --background: #135194;
+  --background-hover: #0f4279;
+  --color: white;
+  --border-radius: 10px;
+  font-weight: 700;
 }

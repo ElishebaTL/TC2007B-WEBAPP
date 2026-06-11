@@ -1,18 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-
-import {
-  IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardContent,
-  IonButton,
-} from '@ionic/angular/standalone';
+import { IonContent } from '@ionic/angular/standalone';
 
 import { Group } from '../../../shared/models/group';
 import { Student } from '../../../shared/models/student';
@@ -24,19 +13,7 @@ import { StudentService } from '../../services/student';
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterLink,
-    IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
-    IonCard,
-    IonCardHeader,
-    IonCardTitle,
-    IonCardContent,
-    IonButton,
-  ],
+  imports: [CommonModule, RouterLink, IonContent],
 })
 export class DashboardPage implements OnInit {
   teacherName = 'Profa. Laura González';
