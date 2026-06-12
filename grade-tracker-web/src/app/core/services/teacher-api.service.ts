@@ -30,6 +30,12 @@ export class TeacherApiService {
     });
   }
 
+  getAnnouncements(): Observable<any> {
+  return this.http.get(`${this.apiUrl}/web/docente/avisos`, {
+    headers: this.getHeaders(),
+  });
+}
+
   getGradeTable(asignacionId: number, periodo: string): Observable<any> {
     return this.http.get(
       `${this.apiUrl}/web/docente/asignaciones/${asignacionId}/calificaciones`,
@@ -49,4 +55,29 @@ export class TeacherApiService {
       }
     );
   }
+  getChats(): Observable<any> {
+  return this.http.get(`${this.apiUrl}/web/docente/chats`, {
+    headers: this.getHeaders(),
+  });
+}
+
+getChatMessages(chatId: number): Observable<any> {
+  return this.http.get(`${this.apiUrl}/web/docente/chats/${chatId}/mensajes`, {
+    headers: this.getHeaders(),
+    params: {
+      page: 1,
+      limit: 20,
+    },
+  });
+}
+
+sendChatMessage(chatId: number, contenido: string): Observable<any> {
+  return this.http.post(
+    `${this.apiUrl}/web/docente/chats/${chatId}/mensajes`,
+    { contenido },
+    {
+      headers: this.getHeaders(),
+    }
+  );
+}
 }

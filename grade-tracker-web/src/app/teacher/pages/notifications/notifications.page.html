@@ -49,8 +49,10 @@
           <div class="notification-info">
             <h2>{{ notification.title }}</h2>
             <p>{{ notification.message }}</p>
-            <small>{{ notification.date }}</small>
-          </div>
+            <small>
+              Grupo: {{ notification.groupName }} · Publicado por {{ notification.author }} · {{ notification.date }}
+            </small>
+            </div>
 
           <span class="status" *ngIf="!notification.read"></span>
         </ion-card-content>
