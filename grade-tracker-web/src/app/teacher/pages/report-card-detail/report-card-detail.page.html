@@ -37,8 +37,21 @@
 
         <ion-card-content>
           <p><strong>Materia:</strong> {{ subject }}</p>
-          <p><strong>Trimestre:</strong> {{ trimester }}</p>
-          <p><strong>Total de estudiantes:</strong> {{ students.length }}</p>
+          <p>
+            <strong>Trimestre:</strong>
+            <select
+            [value]="trimester"
+            (change)="changeTrimester($event)"
+            >
+            <option
+            *ngFor="let t of trimesters"
+            [value]="t"
+            >
+            {{ t }}
+          </option>
+        </select>
+      </p>
+      <p><strong>Total de estudiantes:</strong> {{ students.length }}</p>
           <p><strong>Firmadas:</strong> {{ signedCount }}</p>
           <p><strong>Pendientes:</strong> {{ pendingCount }}</p>
         </ion-card-content>
@@ -57,7 +70,7 @@
             </div>
 
             <span [class.signed]="student.signed" [class.pending]="!student.signed">
-              {{ student.signed ? 'Firmada' : 'Pendiente' }}
+              {{ getSignatureStatus(student) }}
             </span>
           </div>
         </ion-card-content>

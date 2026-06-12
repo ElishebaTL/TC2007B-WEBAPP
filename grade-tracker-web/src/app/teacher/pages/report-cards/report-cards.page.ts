@@ -1,18 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-
-import {
-  IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardContent,
-  IonButton,
-} from '@ionic/angular/standalone';
+import { IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButton } from '@ionic/angular/standalone';
+import { TeacherApiService } from '../../../core/services/teacher-api.service';
 
 @Component({
   selector: 'app-report-cards',
@@ -23,9 +13,6 @@ import {
     CommonModule,
     RouterLink,
     IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
     IonCard,
     IonCardHeader,
     IonCardTitle,
@@ -33,31 +20,43 @@ import {
     IonButton,
   ],
 })
-export class ReportCardsPage {
-  reportCards = [
-    {
-      id: 1,
-      groupName: '5to A',
-      subject: 'Español',
-      totalStudents: 28,
-      signed: 25,
-      pending: 3,
-    },
-    {
-      id: 2,
-      groupName: '5to B',
-      subject: 'Español',
-      totalStudents: 25,
-      signed: 24,
-      pending: 1,
-    },
-    {
-      id: 3,
-      groupName: '6to A',
-      subject: 'Español',
-      totalStudents: 30,
-      signed: 30,
-      pending: 0,
-    },
-  ];
+export class ReportCardsPage implements OnInit {
+  reportCards: any[] = [];
+
+  constructor(private teacherApi: TeacherApiService) {}
+
+  ngOnInit(): void {
+    this.loadReportCards();
+  }
+
+  loadReportCards(): void {
+    this.teacherApi.getAssignments().subscribe({
+      next: (response) => {
+        const assignments = response.data || response;
+
+        this.reportCards = assignments.map((item: any) => {
+          const grupo = item.grupo || {};
+          const materia = item.materia || {};
+
+          return {
+            id: item.asignacion_id,
+            groupId: grupo.grupo_id,
+            groupName:
+              grupo.nombre ||
+              `${grupo.grado}° ${grupo.grupo_letra}`,
+            subject:
+              materia.nombre_materia ||
+              materia.nombre ||
+              'Materia',
+            totalStudents: item.total_alumnos || 0,
+            signed: 0,
+            pending:0,
+          };
+        });
+      },
+      error: (error) => {
+        console.error('Error al cargar boletas:', error);
+      },
+    });
+  }
 }

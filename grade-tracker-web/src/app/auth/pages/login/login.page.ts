@@ -11,6 +11,8 @@ import {
   IonCardContent,
 } from '@ionic/angular/standalone';
 
+import { AuthService } from '../../../core/services/auth.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -27,17 +29,33 @@ import {
   ],
 })
 export class LoginPage {
-  email = '';
-  password = '';
+  email = 'teacher@example.com';
+  password = 'Demo_Teacher1!';
+  errorMessage = '';
+  loading = false;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   login(): void {
-    console.log('DATOS MOCK - login docente:', {
+    this.errorMessage = '';
+    this.loading = true;
+
+    this.authService.login({
       email: this.email,
       password: this.password,
+    }).subscribe({
+      next: () => {
+        this.loading = false;
+        this.router.navigate(['/dashboard']);
+      },
+      error: (error) => {
+        console.error('Error en login:', error);
+        this.loading = false;
+        this.errorMessage = 'No se pudo iniciar sesión. Verifica tus datos o que el backend esté encendido.';
+      },
     });
-
-    this.router.navigate(['/dashboard']);
   }
 }

@@ -7,17 +7,18 @@
       </div>
 
       <nav>
-  <a routerLink="/dashboard">Dashboard</a>
-  <a routerLink="/groups">Grupos</a>
-  <a routerLink="/grade-capture" class="active">Captura de calificaciones</a>
-  <a routerLink="/report-cards">Boletas</a>
-  <a routerLink="/comments">Comentarios</a>
-  <a routerLink="/notifications">Notificaciones</a>
-  <a routerLink="/reports">Reportes</a>
-</nav>
-<div class="logout">
-  <a routerLink="/login">Cerrar sesión</a>
-</div>
+        <a routerLink="/dashboard">Dashboard</a>
+        <a routerLink="/groups">Grupos</a>
+        <a routerLink="/grade-capture" class="active">Captura de calificaciones</a>
+        <a routerLink="/report-cards">Boletas</a>
+        <a routerLink="/comments">Comentarios</a>
+        <a routerLink="/notifications">Notificaciones</a>
+        <a routerLink="/reports">Reportes</a>
+      </nav>
+
+      <div class="logout">
+        <a routerLink="/login">Cerrar sesión</a>
+      </div>
     </aside>
 
     <main class="content">
@@ -29,15 +30,19 @@
       <section class="filters-card">
         <div>
           <label>Grupo</label>
-          <select [(ngModel)]="selectedGroup">
-            <option *ngFor="let group of groups">{{ group }}</option>
+          <select [(ngModel)]="selectedGroupId" (ngModelChange)="onGroupChange()">
+            <option *ngFor="let group of groups" [ngValue]="group.groupId">
+              {{ group.name }} - {{ group.subject }}
+            </option>
           </select>
         </div>
 
         <div>
           <label>Trimestre</label>
-          <select [(ngModel)]="selectedTrimester">
-            <option *ngFor="let trimester of trimesters">{{ trimester }}</option>
+          <select [(ngModel)]="selectedTrimester" (ngModelChange)="loadGrades()">
+            <option *ngFor="let trimester of trimesters" [ngValue]="trimester">
+              {{ trimester }}
+            </option>
           </select>
         </div>
       </section>

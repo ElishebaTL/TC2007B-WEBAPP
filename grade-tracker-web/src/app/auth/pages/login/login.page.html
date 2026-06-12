@@ -27,9 +27,13 @@
           [(ngModel)]="password">
         </ion-input>
 
-        <ion-button expand="block" (click)="login()">
-          Iniciar sesión
-        </ion-button>
+        <ion-button expand="block" (click)="login()" [disabled]="loading">
+  {{ loading ? 'Iniciando sesión...' : 'Iniciar sesión' }}
+</ion-button>
+
+<p class="error-message" *ngIf="errorMessage">
+  {{ errorMessage }}
+</p>
 
         <p class="forgot-password">¿Olvidó su contraseña?</p>
       </ion-card-content>
