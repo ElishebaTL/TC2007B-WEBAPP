@@ -27,8 +27,8 @@ imports: [
 export class ReportCardDetailPage implements OnInit {
   assignmentId = 1;
 
-  groupName = 'Grupo';
-  subject = 'Materia';
+  groupName = 'Grupo no disponible';
+  subject = 'Sin materia asignada';
 
   trimester = 'primer trimestre';
   trimesters = [
@@ -61,8 +61,18 @@ loadAssignmentInfo(): void {
       );
 
       if (assignment) {
-        this.groupName = assignment.grupo?.nombre || 'Grupo';
-        this.subject = assignment.materia?.nombre || 'Materia';
+      const grupo = assignment.grupo || {};
+      const materia = assignment.materia || {};
+
+      this.groupName =
+      grupo.nombre ||
+      `${grupo.grado}° ${grupo.grupo_letra}` ||
+    'Grupo no disponible';
+
+    this.subject =
+    materia.nombre_materia ||
+    materia.nombre ||
+    'Sin materia asignada';
       }
     },
     error: (error) => {
@@ -111,11 +121,11 @@ loadAssignmentInfo(): void {
 }
 
   downloadPdf(): void {
-    alert('Función de descarga PDF pendiente de integración.');
+    alert('Descarga de PDF pendiente de integración en portal docente.');
   }
 
   sendReminder(): void {
-    alert('Función de recordatorio pendiente de integración.');
+    alert('Envío de recordatorio pendiente de integración.');
   }
 }
 

@@ -30,20 +30,13 @@ this.groups = assignments.map((item: any) => {
 
   console.log('Respuesta asignaciones:', response)
   return {
-    id: item.grupo?.grupo_id || item.grupo_id || item.group_id || item.id,
-    name:
-      grupo.nombre ||
-      grupo.name ||
-      `${grupo.grado || item.grado}to ${grupo.grupo_letra || item.grupo_letra}`,
-    subject:
-      materia.nombre_materia ||
-      materia.nombre ||
-      materia.name ||
-      item.nombre_materia ||
-      'Materia',
-    studentsCount: item.total_alumnos || item.studentsCount || item.students_count || 0,
-    pendingReportCards: item.boletas_pendientes || item.pendingReportCards || 0,
-  };
+  id: item.asignacion_id,
+  groupId: grupo.grupo_id,
+  name: grupo.nombre || `${grupo.grado}° ${grupo.grupo_letra}`,
+  subject: materia.nombre_materia || materia.nombre || 'Sin materia asignada',
+  studentsCount: item.total_alumnos || 0,
+  pendingReportCards: item.boletas_pendientes || 0,
+};
 });
 
         console.log('Grupos desde backend:', this.groups);

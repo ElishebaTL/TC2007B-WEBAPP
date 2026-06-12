@@ -12,12 +12,13 @@ import { TeacherApiService } from '../../../core/services/teacher-api.service';
   imports: [CommonModule, RouterLink, IonContent, IonButton],
 })
 export class GroupDetailPage implements OnInit {
+  assignmentId = 1;
   groupId = 1;
 
   group = {
     id: 1,
-    name: 'Grupo',
-    subject: 'Materia',
+    name: 'Grupo no disponible',
+    subject: 'Sin materia asignada',
     studentsCount: 0,
     pendingReportCards: 0,
   };
@@ -31,31 +32,77 @@ export class GroupDetailPage implements OnInit {
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.groupId = id || 1;
-    this.group.id = this.groupId;
+    this.assignmentId = id || 1;
+    this.group.id = this.assignmentId;
 
-    this.loadStudents();
+    this.loadAssignmentInfo();
+  }
+
+  loadAssignmentInfo(): void {
+    this.teacherApi.getAssignments().subscribe({
+      next: (response) => {
+        const assignments = response.data || response;
+
+        const assignment = assignments.find(
+          (a: any) => Number(a.asignacion_id) === Number(this.assignmentId)
+        );
+
+        if (assignment) {
+          const grupo = assignment.grupo || {};
+          const materia = assignment.materia || {};
+
+          this.groupId = grupo.grupo_id;
+
+          this.group = {
+            id: this.assignmentId,
+            name: grupo.nombre || `${grupo.grado}° ${grupo.grupo_letra}`,
+            subject:
+              materia.nombre_materia ||
+              materia.nombre ||
+              'Sin materia asignada',
+            studentsCount: 0,
+            pendingReportCards: assignment.boletas_pendientes || 0,
+          };
+
+          this.loadStudents();
+        }
+      },
+      error: (error) => {
+        console.error('Error al cargar asignación:', error);
+      },
+    });
   }
 
   loadStudents(): void {
-    this.teacherApi.getStudentsByGroup(this.groupId).subscribe({
-      next: (response) => {
-        console.log('Estudiantes desde backend:', response);
+    this.teacherApi
+      .getGradeTable(this.assignmentId, 'primer trimestre')
+      .subscribe({
+        next: (response) => {
+          const data = response.data || response;
 
-        const studentsData = response.data || response;
+          this.students = data.map((item: any) => {
+            const grade = item.calificacion?.nota ?? null;
 
-        this.students = studentsData.map((student: any) => ({
-          id: student.alumno_id || student.id,
-          name: `${student.nombre} ${student.apellido}`,
-          average: student.promedio || 'Pendiente',
-          performance: student.rendimiento || 'Pendiente',
-        }));
+            return {
+              id: item.alumno.alumno_id,
+              name: `${item.alumno.nombre} ${item.alumno.apellido}`,
+              average: grade !== null ? grade : 'Sin calificación',
+              performance: this.getPerformance(grade),
+            };
+          });
 
-        this.group.studentsCount = this.students.length;
-      },
-      error: (error) => {
-        console.error('Error al cargar estudiantes:', error);
-      },
-    });
+          this.group.studentsCount = this.students.length;
+        },
+        error: (error) => {
+          console.error('Error al cargar estudiantes con calificaciones:', error);
+        },
+      });
+  }
+
+  getPerformance(grade: number | null): string {
+    if (grade === null) return 'Sin registro';
+    if (grade >= 9) return 'Alto';
+    if (grade >= 7) return 'Medio';
+    return 'Bajo';
   }
 }

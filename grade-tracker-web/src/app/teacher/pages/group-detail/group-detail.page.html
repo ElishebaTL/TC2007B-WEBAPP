@@ -62,7 +62,7 @@
             class="badge"
             [class.high]="student.performance === 'Alto'"
             [class.medium]="student.performance === 'Medio'">
-            {{ student.performance }}
+            {{ student.performance === 'Sin registro' ? 'Sin registro' : student.performance }}
           </span>
         </div>
       </section>
